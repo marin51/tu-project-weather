@@ -142,17 +142,22 @@
       </template>
 
     <template id="weekly-forecast">
-        <ons-page>
+        <ons-page class="weekly-forecast-page">
           <ons-toolbar>
             <div class="left">
               <ons-toolbar-button onclick="openMenu()">
                 <ons-icon icon="md-menu"></ons-icon>
               </ons-toolbar-button>
             </div>
-            <div class="center">
+            <div id="title" class="center">
             </div>
-            <div class='my-container'></div>
           </ons-toolbar>
+          <div class='my-container'>
+              
+              <img src="res/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
+              <div id="general-city-info"></div>
+              <ons-list id="five-day-forecast"></ons-list>
+            </div>
         </ons-page>
 </template>
 
@@ -164,6 +169,7 @@
     <script type="text/javascript" src="js/startapp.js"></script>
     <script type="text/javascript" src="js/weather.js"></script>
     <script type="text/javascript" src="js/favorites.js"></script>
+    <script type="text/javascript" src="js/weeklyforecast.js"></script>
 
     <script type="text/javascript">
         app.initialize();

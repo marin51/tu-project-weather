@@ -10,7 +10,6 @@ var favorites = (function() {
             for (const city in json_cities) {
                 if (json_cities.hasOwnProperty(city)) {
                     const element = json_cities[city];
-                    console.log(element);
                     $($('#favorites')[0])[0].content.querySelector('#city-list').append(ons.createElement(buildListItem(element)));
 
                 }
@@ -24,7 +23,7 @@ var favorites = (function() {
         loadPage('favorites', '', favoritesController);
 
         function buildListItem(city) {
-            var html = '<ons-list-item>';
+            var html = '<ons-list-item onclick="weeklyforecast.init(\'' + city.name + '\')">';
             html += '<div class="left"><div class="city-temperature">' + city.main.temp + '°C </div></div>';
             html += '<div class="center">' + city.weather[0].main + ' in ' + city.name + '</div></div></div>';
             html += '</ons-list-item>';

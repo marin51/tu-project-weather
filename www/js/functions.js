@@ -55,14 +55,28 @@ var popPage = function() {
 
 function saveDailyForecastCitiesLocally(cityData = {}) {
 
-    window['json_cities'] = JSON.parse(localStorage.getItem('my_project_saved_cities')) || {};
+    window['json_cities'] = JSON.parse(localStorage.getItem('TU_poject_dailycities')) || {};
     if (!$.isEmptyObject(cityData)) {
         json_cities[cityData.name] = cityData;
         json_cities[cityData.name]['date'] = Date.now();
-        localStorage.setItem('my_project_saved_cities', JSON.stringify(json_cities));
+        localStorage.setItem('TU_poject_dailycities', JSON.stringify(json_cities));
     }
 }
 
 function getDailyForecastCitesData() {
-    window['json_cities'] = JSON.parse(localStorage.getItem('my_project_saved_cities')) || {};
+    window['json_cities'] = JSON.parse(localStorage.getItem('TU_poject_dailycities')) || {};
+}
+
+function saveWeeklyForecastCitiesLocally(cityData = {}) {
+    window['json_weeklycities'] = JSON.parse(localStorage.getItem('TU_project_weeklycities')) || {};
+
+    if (!$.isEmptyObject(cityData)) {
+        json_weeklycities[cityData.city.name] = cityData;
+        json_weeklycities[cityData.city.name]['date'] = Date.now();
+        localStorage.setItem('TU_project_weeklycities', JSON.stringify(json_weeklycities));
+    }
+}
+
+function getWeeklyForecastCitesData() {
+    window['json_weeklycities'] = JSON.parse(localStorage.getItem('TU_project_weeklycities')) || {};
 }
