@@ -13,42 +13,18 @@ var weather = (function() {
                 success: function(results) {
 
                     showWeatherData(results);
+                    // dfd.resolve('success');
                 },
                 error: function(error) {
-
+                    // dfd.reject(error);
                 }
             });
         }
-    }
-
-    function getWeeklyForecast(city) {
-        var dfd = jQuery.Deferred();
-        getWeeklyForecastCitesData();
-        if (json_weeklycities.hasOwnProperty(city)) {
-            dfd.resolve('success');
-        } else {
-            //get forecast from server
-            $.ajax({
-                url: 'http://api.openweathermap.org/data/2.5/forecast?q=' + city +
-                    ',BG&appid=' + OpenWeatherAppKey + '&units=metric',
-                type: 'GET',
-
-                success: function(results) {
-                    saveWeeklyForecastCitiesLocally(results);
-                    dfd.resolve('success');
-
-                },
-                error: function(error) {
-                    dfd.reject(error);
-                }
-            });
-        }
-        return dfd.promise();
     }
 
     function showWeatherData(results) {
         var html = '';
-
+        debugger;
 
         $('.main-container #weather-data').html('');
         if (results.weather.length) {
@@ -67,10 +43,13 @@ var weather = (function() {
             html += '<ons-list-item id="sunset">Sunset: ' + sunsetDate.toLocaleTimeString() + '</ons-list-item>';
             html += '</ons-list>';
 
+
+
             $('#home-page-template .main-container').append(html);
             $('.home-message').hide();
             $('#check-location-button').hide();
 
+            $('#home-reset-button').show();
             $('#weather-data').show();
 
 
@@ -118,11 +97,7 @@ var weather = (function() {
     }
 
 
-
-
-
     return {
-        showDailyForest: showDailyForest,
-        getWeeklyForecast: getWeeklyForecast
+        showDailyForest: showDailyForest
     }
 })();

@@ -8,6 +8,12 @@ var startApp = (function() {
 
     function controller() {
         loading.hide();
+        //reset button
+        if ($('#weather-data').length) {
+            $('#home-reset-button').show();
+        } else {
+            $('#home-reset-button').hide();
+        }
 
         //select city logic
         $('#check-location-button').on('click', function() {
@@ -58,13 +64,23 @@ var startApp = (function() {
 
     }
 
+    function reset() {
+        if ($('#weather-data').length) {
+            $('.home-message').show();
+            $('#check-location-button').show();
+
+            $('#weather-data').hide();
+        }
+    }
+
 
 
 
 
 
     return {
-        init: init
+        init: init,
+        reset: reset
     }
 
 
