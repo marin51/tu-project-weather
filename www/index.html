@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!--
     Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
-
     Licensed to the Apache Software Foundation (ASF) under one
     or more contributor license agreements.  See the NOTICE file
     distributed with this work for additional information
@@ -9,9 +8,7 @@
     to you under the Apache License, Version 2.0 (the
     "License"); you may not use this file except in compliance
     with the License.  You may obtain a copy of the License at
-
     http://www.apache.org/licenses/LICENSE-2.0
-
     Unless required by applicable law or agreed to in writing,
     software distributed under the License is distributed on an
     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -27,7 +24,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -38,7 +35,6 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://api.openweathermap.org https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />
     <link rel="stylesheet" href="libs/onsen/css/onsen-css-components.css">
     <link rel="stylesheet" href="libs/onsen/css/onsenui.css">
     <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -91,7 +87,7 @@
                       </ons-toolbar-button>
                     </div>
                     <div class="center">
-                      Welcome =)
+                      Welcome to my app
                     </div>
 
                   </ons-toolbar>
@@ -118,10 +114,10 @@
                     </div>
                   </ons-toolbar>
                   <div class="main-container">
-                    <ons-card>
-                      <div>You can add new forecasts from a home page.</div>
-                        <img src="res/undraw_weather_app_i5sm.svg" style="max-width: 100%" alt="">
-                    </ons-card>
+                      <ons-card>
+                          <div>You can add new forecasts from a home page.</div>
+                            <img src="res/undraw_weather_app_i5sm.svg" style="max-width: 100%" alt="">
+                        </ons-card>
                     <ons-list id="city-list"></ons-list>
                   </div>
                 </ons-page>
@@ -158,8 +154,6 @@
                 <div id="general-city-info"></div>
                 <img src="res/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
               </ons-card>
-             
-             
               <ons-list id="five-day-forecast"></ons-list>
             </div>
         </ons-page>
