@@ -55,9 +55,6 @@
                 <ons-list-item onclick="favorites.init()" tappable>
                     My favorite cities
                 </ons-list-item>
-                <ons-list-item onclick="weeklyForecast.init()" tappable>
-                    Add new city
-                </ons-list-item>
             </ons-page>
         </ons-splitter-side>
         <ons-splitter-content>
@@ -93,7 +90,7 @@
                       </ons-toolbar-button>
                     </div>
                     <div class="center">
-                      Welcome to my app
+                      Welcome =)
                     </div>
 
                   </ons-toolbar>
@@ -101,9 +98,8 @@
                     <div id="home-reset-button" onclick="startApp.reset()" style="float:right">Reset</div>
                       <img src="../www/res/cloudy-day-weather.svg" alt="weather" srcset="">
                       <div class="home-message">Let's check location first...</div>
-                      <button id="check-location-button" class="button--cta">Check my location</button>
+                      <button id="check-location-button" class="button--cta">Add city</button>
                       <ons-progress-circular class="progess-icon hide" indeterminate></ons-progress-circular>
-                      <img class="fail-icon hide" src="../www/res/baseline-close-24px.svg" alt="" srcset="">
                   </div>
                 </ons-page>
               </template>
@@ -121,6 +117,10 @@
                     </div>
                   </ons-toolbar>
                   <div class="main-container">
+                    <ons-card>
+                      <div>You can add new forecasts from a home page.</div>
+                        <img src="res/undraw_weather_app_i5sm.svg" style="max-width: 100%" alt="">
+                    </ons-card>
                     <ons-list id="city-list"></ons-list>
                   </div>
                 </ons-page>
@@ -145,17 +145,20 @@
         <ons-page class="weekly-forecast-page">
           <ons-toolbar>
             <div class="left">
-              <ons-toolbar-button onclick="openMenu()">
-                <ons-icon icon="md-menu"></ons-icon>
+                <ons-back-button></ons-back-button>
               </ons-toolbar-button>
             </div>
             <div id="title" class="center">
             </div>
           </ons-toolbar>
-          <div class='my-container'>
-              
-              <img src="res/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
-              <div id="general-city-info"></div>
+          <div class='main-container'>
+              <ons-card> 
+                You can see five days forecast in list below 
+                <div id="general-city-info"></div>
+                <img src="res/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
+              </ons-card>
+             
+             
               <ons-list id="five-day-forecast"></ons-list>
             </div>
         </ons-page>

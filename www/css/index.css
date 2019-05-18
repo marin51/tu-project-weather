@@ -10,6 +10,125 @@
     padding-left: 10px;
 }
 
+.home-message {
+    padding-bottom: 5px;
+}
+
+#check-location-button.button--cta {
+    display: inline-block;
+    margin: 0;
+}
+
 .button--cta {
     margin: 5px 0px;
+    display: block;
+}
+
+#weather-data .footer-button {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.weekly-forecast-page #general-city-info .card #coords div {
+    display: inline;
+}
+
+.weekly-forecast-page #general-city-info .card #population div {
+    display: inline;
+}
+
+.weekly-forecast-page #general-city-info .card #country div {
+    display: inline;
+}
+
+#five-day-forecast ons-list-item {
+    height: 100px;
+    padding: 5px;
+}
+
+#five-day-forecast .left,
+#five-day-forecast .center,
+#five-day-forecast .right {
+    font-size: 14px;
+    padding: 10px;
+    width: calc(100% / 3);
+    margin: 0;
+    border-bottom: 1px solid gray;
+}
+
+#five-day-forecast .right {
+    text-align: right;
+}
+
+#five-day-forecast .center {
+    text-align: left;
+}
+
+#five-day-forecast .left .weater-info-long {
+    padding: 0px 5px 0px 5px;
+    display: block;
+}
+
+.main-container ons-list {
+    border-radius: 5px;
+    border: 1px solid #efeff4;
+}
+
+.main-container ons-list-header {
+    font-size: 20px;
+    color: #02b3f1;
+    border-bottom: 1px solid #02b3f1;
+    margin: 8px 16px;
+    padding: 12px 0px 3px 0px;
+}
+
+.main-container ons-list-item .center {
+    border-bottom: 1px solid grey;
+    margin-right: 15px
+}
+
+.main-container #sunset .center {
+    border-bottom: 0;
+}
+
+.main-container ons-list-item .left .city-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #02b3f1;
+    color: white;
+}
+
+.main-container #city-list ons-list-item .left {
+    border-bottom: 1px solid grey
+}
+
+.main-container ons-list-item .left .city-icon h5 {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 18px;
+    font-size: 15px;
+}
+
+ons-card {
+    color: #444053;
+}
+
+.main-container #city-list ons-list-item .left {
+    border-bottom: 1px solid grey
+}
+
+.main-container .empty-favorites {
+    text-align: center;
+    border-radius: 5px;
+    background-color: white;
+    margin: 10px;
+    padding: 15px 0 15px 0;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
+}
+
+.main-container ons-list-item .right #remove-from-favorites {
+    font-size: 20px;
+    color: red;
+    padding: 10px;
 }

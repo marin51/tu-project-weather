@@ -1,5 +1,4 @@
 var startApp = (function() {
-    var city = '';
 
     function init() {
         getDailyForecastCitesData();
@@ -17,37 +16,49 @@ var startApp = (function() {
 
         //select city logic
         $('#check-location-button').on('click', function() {
-            $('.fail-icon').addClass('hide');
             $('.progess-icon').removeClass('hide');
-            ons.notification.confirm({
-                title: 'Hello!',
-                message: "Are you from Sofia?",
-                buttonLabels: ['No', 'Yes'],
-            }).then(function(btnIndex) {
-                if (btnIndex === 1) {
-                    city = 'Sofia';
-                    $('.progess-icon').addClass('hide');
-                    weather.showDailyForest(city);
-                    console.log('save');
-                } else {
-                    ons.notification.prompt({
-                        title: 'Well...',
-                        message: 'Please type your city to field below',
+            if ($.isEmptyObject(json_cities)) {
+                ons.notification.confirm({
+                    title: 'Hello!',
+                    message: "Are you from Sofia?",
+                    buttonLabels: ['No', 'Yes'],
+                }).then(function(btnIndex) {
+                    if (btnIndex === 1) {
+                        $('.progess-icon').addClass('hide');
+                        weather.showDailyForest('Sofia');
+                        console.log('save');
+                    } else {
+                        ons.notification.prompt({
+                            title: 'Well...',
+                            message: 'Please type your city to field below',
 
-                    }).then(function(typedCity) {
-                        if (typedCity) {
-                            city = typedCity;
+                        }).then(function(typedCity) {
+                            if (typedCity) {
+                                weather.showDailyForest(typedCity);
+                                $('.progess-icon').addClass('hide');
+                                console.log(city);
+                            } else {
+                                $('.progess-icon').addClass('hide');
+                                $('#home-message').text('It seems you have not select city yet.');
+                            }
+                        });
+                    }
+                });
+            } else {
+                ons.notification.prompt({
+                    title: 'Well...',
+                    message: 'Please type your city to field below',
+                }).then(function(typedCity) {
+                    if (typedCity) {
+                        weather.showDailyForest(typedCity);
+                        $('.progess-icon').addClass('hide');
+                    } else {
+                        $('.progess-icon').addClass('hide');
+                        $('#home-message').text('It seems you have not select city yet.');
+                    }
+                });
+            }
 
-                            weather.showDailyForest(typedCity);
-                            $('.progess-icon').addClass('hide');
-                            console.log(city);
-                        } else {
-                            $('.progess-icon').addClass('hide');
-                            $('.fail-icon').removeClass('hide');
-                        }
-                    });
-                }
-            });
         });
 
 
@@ -65,18 +76,12 @@ var startApp = (function() {
     }
 
     function reset() {
-        if ($('#weather-data').length) {
-            $('.home-message').show();
-            $('#check-location-button').show();
+        $('.home-message').show();
+        $('#check-location-button').show();
+        $('#weather-data').hide();
+        $('#home-reset-button').hide();
 
-            $('#weather-data').hide();
-        }
     }
-
-
-
-
-
 
     return {
         init: init,
