@@ -37,7 +37,7 @@ var favorites = (function() {
         function favoritesController() {
             if (!$('#city-list ons-list-item').length) {
                 $('#city-list').remove();
-                $('.main-container').append('<div class="empty-favorites">There are no favorites :/</div>')
+                $('.main-container').append('<div class="empty-favorites">There are no favorites!</div>')
             }
         }
     }
@@ -51,7 +51,7 @@ var favorites = (function() {
 
         if (!$('#city-list ons-list-item').length) {
             $('#city-list').remove();
-            $('.main-container').append('<div>There are no favorites :/</div>')
+            $('.main-container').append('<div class="empty-favorites">There are no favorites!</div>')
         }
 
         if (daily.hasOwnProperty(city)) {
