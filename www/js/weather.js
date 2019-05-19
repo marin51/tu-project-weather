@@ -2,24 +2,28 @@ var weather = (function() {
     var OpenWeatherAppKey = "271e0eab66001b4207410ec33d7cf4f9";
 
     function showDailyForest(city) {
-        if (json_cities.hasOwnProperty(city) && isActualForecast(json_cities[city].date)) {
-            showWeatherData(json_cities[city]);
-        } else {
-            $.ajax({
-                url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city +
-                    ',BG&appid=' + OpenWeatherAppKey + '&units=metric',
-                type: 'GET',
+        alert('city ' + city)
+            // if (json_cities.hasOwnProperty(city) && isActualForecast(json_cities[city].date)) {
+            // showWeatherData(json_cities[city]);
+            // } else {
+        var link = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',BG&appid=' + OpenWeatherAppKey + '&units=metric';
+        alert(link)
+        $.ajax({
+            url: link,
+            type: 'GET',
 
-                success: function(results) {
-                    saveDailyForecastCitiesLocally(results);
-                    showWeatherData(results);
-                    // dfd.resolve('success');
-                },
-                error: function(error) {
+            success: function(results) {
+                alert(JSON.stringify(results))
+                saveDailyForecastCitiesLocally(results);
+                showWeatherData(results);
+                // dfd.resolve('success');
+            },
+            error: function(error) {
+                alert(JSON.stringify(error))
                     // dfd.reject(error);
-                }
-            });
-        }
+            }
+        });
+        // }
     }
 
     function getWeeklyForecast(city) {
@@ -30,8 +34,7 @@ var weather = (function() {
         } else {
             //get forecast from server
             $.ajax({
-                url: 'http://api.openweathermap.org/data/2.5/forecast?q=' + city +
-                    ',BG&appid=' + OpenWeatherAppKey + '&units=metric',
+                url: 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',BG&appid=' + OpenWeatherAppKey + '&units=metric',
                 type: 'GET',
 
                 success: function(results) {
