@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.meetingbox.app" version="1.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.meetingbox.app" version="1.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Weather PMU</name>
     <description>
        University Project for weather forecast
@@ -110,6 +110,7 @@
     <allow-intent href="geo:*" />
     <allow-intent href="*" />
     <platform name="android">
+        <allow-intent href="*" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
