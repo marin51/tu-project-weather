@@ -49,19 +49,20 @@
 #five-day-forecast .left,
 #five-day-forecast .center,
 #five-day-forecast .right {
+    background-image: none;
     font-size: 14px;
     padding: 10px;
-    width: calc(100% / 3);
     margin: 0;
-    border-bottom: 1px solid gray;
 }
 
 #five-day-forecast .right {
     text-align: right;
+    background-image: none;
 }
 
 #five-day-forecast .center {
     text-align: left;
+    background-image: none;
 }
 
 #five-day-forecast .left .weater-info-long {
@@ -84,11 +85,8 @@
 
 .main-container ons-list-item .center {
     border-bottom: 1px solid grey;
-    margin-right: 15px
-}
-
-.main-container #sunset .center {
-    border-bottom: 0;
+    margin-right: 15px;
+    background-image: none;
 }
 
 .main-container ons-list-item .left .city-icon {
@@ -97,10 +95,12 @@
     border-radius: 50%;
     background-color: #02b3f1;
     color: white;
+    background-image: none;
 }
 
 .main-container #city-list ons-list-item .left {
-    border-bottom: 1px solid grey
+    border-bottom: 1px solid grey;
+    background-image: none;
 }
 
 .main-container ons-list-item .left .city-icon h5 {
@@ -115,7 +115,8 @@ ons-card {
 }
 
 .main-container #city-list ons-list-item .left {
-    border-bottom: 1px solid grey
+    border-bottom: 1px solid grey;
+    background-image: none;
 }
 
 .main-container .empty-favorites {
@@ -131,4 +132,28 @@ ons-card {
     font-size: 20px;
     color: red;
     padding: 10px;
+}
+
+#five-day-forecast .card {
+    background-color: #02b3f1;
+    color: white;
+}
+
+#five-day-forecast .weather-title {
+    background-color: #023af1;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+#five-day-forecast .weather-item {
+    padding: 5px;
+}
+
+#five-day-forecast .weather-description {
+    padding: 3px;
+    font-style: italic;
+}
+
+.right {
+    background-image: none;
 }

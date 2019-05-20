@@ -10,7 +10,7 @@ var favorites = (function() {
             for (const city in json_cities) {
                 if (json_cities.hasOwnProperty(city)) {
                     const element = json_cities[city];
-                    $($('#favorites')[0])[0].content.querySelector('#city-list').append(ons.createElement(buildListItem(element)));
+                    $($('#favorites')[0])[0].content.querySelector('#city-list').append(ons.createElement(buildListItem(element, city)));
 
                 }
             }
@@ -22,11 +22,11 @@ var favorites = (function() {
 
         loadPage('favorites', '', favoritesController);
 
-        function buildListItem(city) {
-            var html = '<ons-list-item id="favorite-city-' + city.name + '">';
-            html += '<div onclick="weeklyforecast.init(\'' + city.name + '\')" class="center"><div class="city-temperature">Now: ' + city.weather[0].main + ' ' + city.main.temp + '°C </div></div>';
-            html += '<div onclick="weeklyforecast.init(\'' + city.name + '\')" class="left"><div class="city-icon"><h5>' + city.name + '</h5></div></div></div></div>';
-            html += '<div class="right"><div id="remove-from-favorites" onclick="favorites.remove(\'' + city.name + '\')">x</div></div></div></div>';
+        function buildListItem(city, name) {
+            var html = '<ons-list-item id="favorite-city-' + name + '">';
+            html += '<div onclick="weeklyforecast.init(\'' + name + '\')" class="center"><div class="city-temperature">Now: ' + city.DailyForecasts[0].RealFeelTemperature.Maximum.Value + '°C </div></div>';
+            html += '<div onclick="weeklyforecast.init(\'' + name + '\')" class="left"><div class="city-icon"><h5>' + name + '</h5></div></div></div></div>';
+            html += '<div class="right"><div id="remove-from-favorites" onclick="favorites.remove(\'' + name + '\')">x</div></div></div></div>';
             html += '</ons-list-item>';
 
             return html;
@@ -60,18 +60,21 @@ var favorites = (function() {
             if ($.isEmptyObject(daily)) {
                 localStorage.removeItem('TU_poject_dailycities');
             } else {
-                saveDailyForecastCitiesLocally(daily);
+                localStorage.setItem('TU_poject_dailycities', JSON.stringify(daily));
             }
+
+            window['json_cities'] = daily;
         }
 
         if (weekly.hasOwnProperty(city)) {
             delete weekly[city];
-            console.log(weekly);
             if ($.isEmptyObject(weekly)) {
                 localStorage.removeItem('TU_project_weeklycities');
             } else {
-                saveWeeklyForecastCitiesLocally(weekly);
+                localStorage.setItem('TU_project_weeklycities', JSON.stringify(weekly));
             }
+
+            window['json_weeklycities'] = weekly;
         }
 
     }

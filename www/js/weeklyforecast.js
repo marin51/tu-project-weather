@@ -3,45 +3,33 @@ var weeklyforecast = (function() {
     function init(city) {
         //get city data
         weather.getWeeklyForecast(city).then(function(success) {
-            var cityData = json_weeklycities[city],
+            var cityData = json_weeklycities[city].DailyForecasts,
                 headerHTML = '',
                 listItemHTML = '';
             //build content
-            headerHTML += '<div class="card">';
-            headerHTML += '<div id="country">Country: <div class="country">' + cityData.city.country + '</div></div>';
-            headerHTML += '<div id="population">Population: <div class="population">' + cityData.city.population + '</div></div>';
-            headerHTML += '<div id="coords">Coords: <div class="lat"> lat: ' + cityData.city.coord.lat + '</div><div class="lon"> lon: ' + cityData.city.coord.lon + '</div></div>';
-            headerHTML += '</div>';
+            // headerHTML += '<div class="card">';
+            // headerHTML += '<div id="country">Country: <div class="country">' + 'Bulgaria' + '</div></div>';
+            // headerHTML += '<div id="population">Population: <div class="population">' + cityData.city.population + '</div></div>';
+            // headerHTML += '<div id="coords">Coords: <div class="lat"> lat: ' + cityData.city.coord.lat + '</div><div class="lon"> lon: ' + cityData.city.coord.lon + '</div></div>';
+            // headerHTML += '</div>';
 
 
             $($('#weekly-forecast')[0])[0].content.querySelector('#general-city-info').innerHTML = headerHTML;
 
 
-            for (const forecast in cityData.list) {
-                if (cityData.list.hasOwnProperty(forecast)) {
-                    const element = cityData.list[forecast];
-                    console.log('element', element);
-                    var time = element.dt_txt.slice(0, -3).split(' '),
-                        date = element.dt_txt.slice(0, -9).split('-');
 
-                    listItemHTML += '<ons-list-item>';
-                    //time and main info
-                    listItemHTML += '<div class="left"><div class="heading">' + date[2] + '/' + date[1] + '<div>' +
-                        time[1] + 'h</div></div></div>';
-                    //degreees
-                    listItemHTML += '<div class="center"><div class="weater-info-long">' + element.weather[0].description + '</div><div class="temp-min">' + element.main.temp + '°C</div></div>';
-                    //wind and
-                    listItemHTML += '<div class="right"><div class="wind-speed">Wind:' + element.wind.speed + ' km/h <br>' + genereteWindDirection(element.wind.deg) + '</div></div>';
 
-                    listItemHTML += '</ons-list-item>';
-                }
-            }
 
-            $($('#weekly-forecast')[0])[0].content.querySelector('#five-day-forecast').innerHTML = listItemHTML;
+
+
+            $($('#weekly-forecast')[0])[0].content.querySelector('#five-day-forecast').innerHTML = generateForecastHTML(city);
 
             //controller
             function controller() {
-                $('.weekly-forecast-page #title').text(cityData.city.name);
+                $('.weekly-forecast-page #title').text(city);
+
+
+
             }
             //display
             pushPage('weekly-forecast', '', controller);
@@ -50,10 +38,34 @@ var weeklyforecast = (function() {
             ons.notification.alert('Ooops! It seems there are an error. Please try again later.');
         })
 
+    }
+
+
+    function generateForecastHTML(city) {
+        var html = '',
+            // isdaytimeBool = isDaytime(json_weather.weatherData.DailyForecasts[0].Sun.Rise, json_weather.weatherData.DailyForecasts[0].Sun.Set, json_weather.cityData.TimeZone.Name),
+            forecastLength = json_weeklycities[city].DailyForecasts.length,
+            forecastData = json_weeklycities[city].DailyForecasts;
 
 
 
+        for (let dailyCast = 0; dailyCast < forecastLength; dailyCast++) {
 
+            html += '<div class="card">';
+            html += '<div class="weather-title"> ' + forecastData[dailyCast].Date.slice(0, -9) + '</div>';
+
+            html += '<div class="weather-description"> ' + forecastData[dailyCast].Day.LongPhrase + '.</div>';
+            html += '<div class="weather-item">Today minimum :' + forecastData[dailyCast].Temperature.Minimum.Value + '°C</div>';
+            html += '<div class="weather-item">Today maximum : ' + forecastData[dailyCast].Temperature.Maximum.Value + '°C</div>';
+            html += '<div class="weather-item">Precipitation Probability: ' + forecastData[dailyCast].Day.PrecipitationProbability + ' %</div>';
+            html += '<div class="weather-item">Wind: ' + forecastData[dailyCast].Day.Wind.Speed.Value + ' km/h</div>';
+            html += '<div class="weather-item">Cloud Cover: ' + forecastData[dailyCast].Day.CloudCover + ' %</div>';
+            html += '<div class="weather-item">Cloud Cover: ' + forecastData[dailyCast].Day.CloudCover + ' %</div>';
+            html += '</div>';
+        }
+
+
+        return html;
     }
 
     return { init: init }

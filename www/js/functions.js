@@ -53,11 +53,10 @@ var popPage = function() {
 };
 
 
-function saveDailyForecastCitiesLocally(cityData = {}) {
+function saveDailyForecastCitiesLocally(cityData = {}, city) {
     window['json_cities'] = JSON.parse(localStorage.getItem('TU_poject_dailycities')) || {};
     if (!$.isEmptyObject(cityData)) {
-        json_cities[cityData.name] = cityData;
-        json_cities[cityData.name]['date'] = Date.now();
+        json_cities[city] = cityData;
         localStorage.setItem('TU_poject_dailycities', JSON.stringify(json_cities));
     }
 }
@@ -67,12 +66,11 @@ function getDailyForecastCitesData() {
     return window['json_cities'];
 }
 
-function saveWeeklyForecastCitiesLocally(cityData = {}) {
+function saveWeeklyForecastCitiesLocally(cityData = {}, city) {
     window['json_weeklycities'] = JSON.parse(localStorage.getItem('TU_project_weeklycities')) || {};
 
     if (!$.isEmptyObject(cityData)) {
-        json_weeklycities[cityData.city.name] = cityData;
-        json_weeklycities[cityData.city.name]['date'] = Date.now();
+        json_weeklycities[city] = cityData;
         localStorage.setItem('TU_project_weeklycities', JSON.stringify(json_weeklycities));
     }
 }
@@ -113,9 +111,9 @@ function genereteWindDirection(degreess) {
 
 
 function isActualForecast(forecastDay) {
-    var dateNow = new Date().toLocaleDateString();
+    var dateNow = new Date().getDate();
 
-    if (dateNow == new Date().toLocaleDateString(forecastDay)) {
+    if (dateNow == new Date(forecastDay)) {
         return true;
     } else {
         return false;
