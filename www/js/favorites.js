@@ -23,7 +23,7 @@ var favorites = (function() {
         loadPage('favorites', '', favoritesController);
 
         function buildListItem(city, name) {
-            var html = '<ons-list-item id="favorite-city-' + name + '">';
+            let html = '<ons-list-item id="favorite-city-' + name + '">';
             html += '<div onclick="weeklyforecast.init(\'' + name + '\')" class="center"><div class="city-temperature">Now: ' + city.DailyForecasts[0].RealFeelTemperature.Maximum.Value + '°C </div></div>';
             html += '<div onclick="weeklyforecast.init(\'' + name + '\')" class="left"><div class="city-icon"><h5>' + name + '</h5></div></div></div></div>';
             html += '<div class="right"><div id="remove-from-favorites" onclick="favorites.remove(\'' + name + '\')">x</div></div></div></div>';
@@ -43,7 +43,7 @@ var favorites = (function() {
     }
 
     function remove(city) {
-        var daily = getDailyForecastCitesData(),
+        let daily = getDailyForecastCitesData(),
             weekly = getWeeklyForecastCitesData();
         console.log('daily', daily);
         console.log('weekly', weekly);

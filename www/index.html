@@ -1,40 +1,15 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
+
+<html lang="en_US">
 
 <head>
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' mailto:* data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval' file://* ; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; media-src *; img-src * data: blob: ; connect-src *;"
+    />
 
-
-    <meta http-equiv="Content-Security-Policy" content="default-src *  data: blob: 'unsafe-inline' 'unsafe-eval'; 
-    script-src * data: blob: 'unsafe-inline' 'unsafe-eval'; 
-    connect-src * data: blob: 'unsafe-inline'; 
-    img-src * data: blob: 'unsafe-inline'; 
-    frame-src * data: blob: ; 
-    style-src * data: blob: 'unsafe-inline';
-    font-src * data: blob: 'unsafe-inline';">
-
-
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; "> -->
 
     <link rel="stylesheet" href="libs/onsen/css/onsen-css-components.css">
     <link rel="stylesheet" href="libs/onsen/css/onsenui.css">
@@ -93,8 +68,7 @@
 
                   </ons-toolbar>
                   <div class="main-container">
-                      <img src="../www/res/cloudy-day-weather.svg" alt="weather" srcset="">
-                      <div class="home-message">Let's check location first...</div>
+                      <img src="../www/res/img/cloudy-day-weather.svg" alt="weather" srcset="">
                       <button id="check-location-button" class="button--cta">Add city</button>
                       <ons-progress-circular class="progess-icon hide" indeterminate></ons-progress-circular>
                   </div>
@@ -116,7 +90,7 @@
                   <div class="main-container">
                       <ons-card>
                           <div>You can add new forecasts from a home page.</div>
-                            <img src="res/undraw_weather_app_i5sm.svg" style="max-width: 100%" alt="">
+                            <img src="res/img/undraw_weather_app_i5sm.svg" style="max-width: 100%" alt="">
                         </ons-card>
                     <ons-list id="city-list"></ons-list>
                   </div>
@@ -152,7 +126,7 @@
               <ons-card> 
                 You can see five days forecast in list below 
                 <div id="general-city-info"></div>
-                <img src="res/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
+                <img src="res/img/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
               </ons-card>
               <ons-list id="five-day-forecast"></ons-list>
             </div>

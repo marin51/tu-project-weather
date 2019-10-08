@@ -1,9 +1,20 @@
 var startApp = (function() {
-    var city = '';
 
     function init() {
         getDailyForecastCitesData();
-        loadPage('home', '', controller);
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            weather.getCurrentPositionForecast(position.coords.latitude, position.coords.longitude).then(function(data) {
+
+                saveDailyForecastCitiesLocally(data.forecast, data.city);
+                // showWeatherData(data.forecast, data.city);
+                loadPage('home', '', controller);
+            }, function(error) {
+                loadPage('home', '', controller);
+            });
+        }, function(error) {
+            loadPage('home', '', controller);
+        });
     }
 
     function controller() {
@@ -20,72 +31,28 @@ var startApp = (function() {
             $('.fail-icon').addClass('hide');
             $('.progess-icon').removeClass('hide');
 
-            if (!$.isEmptyObject(json_cities)) {
-                ons.notification.prompt({
-                    title: 'Well...',
-                    message: 'Please type your city to field below',
+            ons.notification.prompt({
+                title: 'Well...',
+                message: 'Please type your city to field below',
 
-                }).then(function(typedCity) {
-                    if (typedCity) {
-                        city = typedCity;
+            }).then(function(typedCity) {
+                if (typedCity) {
 
-                        weather.getDailyForecast(typedCity).then(function(results) {
-                            saveDailyForecastCitiesLocally(results, city);
-                            showWeatherData(results, city);
-                        }, function(error) {
-                            $('#weather-data').hide();
-                            $('.home-message').text("Error retrieving data. ");
-                        });
-                        $('.progess-icon').addClass('hide');
+                    weather.getDailyForecast(typedCity).then(function(results) {
+                        saveDailyForecastCitiesLocally(results, typedCity);
+                        showWeatherData(results, typedCity);
+                    }, function(error) {
+                        $('#weather-data').hide();
+                        $('.home-message').text("Error retrieving data. ");
+                    });
+                    $('.progess-icon').addClass('hide');
 
-                    } else {
-                        $('.progess-icon').addClass('hide');
-                        $('.fail-icon').removeClass('hide');
-                    }
-                });
-            } else {
-                ons.notification.confirm({
-                    title: 'Hello!',
-                    message: "Are you from Sofia?",
-                    buttonLabels: ['No', 'Yes'],
-                }).then(function(btnIndex) {
-                    if (btnIndex === 1) {
-                        city = 'Sofia';
-                        $('.progess-icon').addClass('hide');
-                        weather.getDailyForecast(city).then(function(results) {
-                            saveDailyForecastCitiesLocally(results, city);
-                            showWeatherData(results, city);
-                        }, function(error) {
-                            $('#weather-data').hide();
-                            $('.home-message').text("Error retrieving data. ");
-                        });
-                        console.log('save');
-                    } else {
-                        ons.notification.prompt({
-                            title: 'Well...',
-                            message: 'Please type your city to field below',
+                } else {
+                    $('.progess-icon').addClass('hide');
+                    $('.fail-icon').removeClass('hide');
+                }
+            });
 
-                        }).then(function(typedCity) {
-                            if (typedCity) {
-                                city = typedCity;
-
-                                weather.getDailyForecast(typedCity).then(function(results) {
-                                    saveDailyForecastCitiesLocally(results, city);
-                                    showWeatherData(results, city);
-                                }, function(error) {
-                                    $('#weather-data').hide();
-                                    $('.home-message').text("Error retrieving data. ");
-                                });
-                                $('.progess-icon').addClass('hide');
-
-                            } else {
-                                $('.progess-icon').addClass('hide');
-                                $('.fail-icon').removeClass('hide');
-                            }
-                        });
-                    }
-                });
-            }
 
         });
 
@@ -93,8 +60,7 @@ var startApp = (function() {
         if (typeof json_cities !== 'undefined') {
             for (const key in json_cities) {
                 if (json_cities.hasOwnProperty(key)) {
-                    const element = json_cities[key];
-                    var buttonHTML = '<button class="button--cta list-city-buttns" onclick="startApp.showForecast(\'' + key + '\')">See forecast for ' + key + '</button>';
+                    let buttonHTML = '<button class="button--cta list-city-buttns" onclick="startApp.showForecast(\'' + key + '\')">See forecast for ' + key + '</button>';
                     $('#home-page-template .main-container').append(buttonHTML);
                 }
             }
@@ -117,7 +83,7 @@ var startApp = (function() {
 
 
     function showWeatherData(results, city) {
-        var html = '';
+        let html = '';
         if ($('.main-container #weather-data').length) {
             $('.main-container #weather-data').html('');
         } else {
@@ -125,7 +91,7 @@ var startApp = (function() {
         }
 
         if (results) {
-            html += '<ons-list-header id="title">City ' + city + ' <img class="done-icon hide" src="../www/res/baseline-done-24px.svg" alt="" srcset=""></ons-list-header>';
+            html += '<ons-list-header id="title">City ' + city + ' <img class="done-icon hide" src="../www/res/img/baseline-done-24px.svg" alt="" srcset=""></ons-list-header>';
             html += '<ons-list-item id="min-temp">Today minimum :' + results.DailyForecasts[0].Temperature.Minimum.Value + '°C</ons-list-item>';
             html += '<ons-list-item id="max-tem">Today maximum : ' + results.DailyForecasts[0].Temperature.Maximum.Value + '°C</ons-list-item>';
             html += '<ons-list-item id="wind-speed"> ' + results.Headline.Text + '</ons-list-item>';
@@ -167,7 +133,7 @@ var startApp = (function() {
 
             for (const key in json_cities) {
                 if (json_cities.hasOwnProperty(key)) {
-                    var buttonHTML = '<button class="button--cta list-city-buttns" onclick="startApp.showForecast(\'' + key + '\')">See forecast for ' + key + '</button>';
+                    let buttonHTML = '<button class="button--cta list-city-buttns" onclick="startApp.showForecast(\'' + key + '\')">See forecast for ' + key + '</button>';
                     $(buttonHTML).insertAfter("#check-location-button");
                 }
             }

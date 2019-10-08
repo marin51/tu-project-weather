@@ -1,1 +1,6 @@
 #Ignore folder named `platforms`
+platforms/*
+node_modules/*
+plugins/*
+.vscode/*
+.vscode/typings/*

@@ -2,19 +2,18 @@ var weather = (function() {
 
 
     function getDailyForecast(city) {
-        var dfd = jQuery.Deferred();
+        let dfd = jQuery.Deferred();
 
         if (json_cities.hasOwnProperty(city) && isActualForecast(json_cities[city].DailyForecasts[0].Date)) {
             dfd.resolve(json_cities[city])
         } else {
             weatherAPI.searchCityByName(city).then(function(citykeys) {
-                var cityId = '';
+                let cityId = null;
                 for (const city in citykeys) {
                     if (citykeys.hasOwnProperty(city)) {
-                        const singleCity = citykeys[city];
 
-                        if (singleCity.Country.EnglishName === "Bulgaria") {
-                            cityId = singleCity.Key;
+                        if (citykeys[city].Country.EnglishName === "Bulgaria") {
+                            cityId = citykeys[city].Key;
                         }
 
                     }
@@ -39,19 +38,18 @@ var weather = (function() {
     }
 
     function getWeeklyForecast(city) {
-        var dfd = jQuery.Deferred();
+        let dfd = jQuery.Deferred();
         getWeeklyForecastCitesData();
         if (json_weeklycities.hasOwnProperty(city) && isActualForecast(json_weeklycities[city].date)) {
             dfd.resolve('success');
         } else {
             weatherAPI.searchCityByName(city).then(function(citykeys) {
-                var cityId = '';
+                let cityId = null;
                 for (const city in citykeys) {
                     if (citykeys.hasOwnProperty(city)) {
-                        const singleCity = citykeys[city];
 
-                        if (singleCity.Country.EnglishName === "Bulgaria") {
-                            cityId = singleCity.Key;
+                        if (citykeys[city].Country.EnglishName === "Bulgaria") {
+                            cityId = citykeys[city].Key;
                         }
                     }
                 }
@@ -67,8 +65,37 @@ var weather = (function() {
         }
         return dfd.promise();
     }
+
+    function getCurrentPositionForecast(latitude, longitude) {
+
+        let dfd = jQuery.Deferred();
+
+        weatherAPI.searchCityByGeoposition(latitude, longitude).then(function(cityData) {
+            if (cityData) {
+                weatherAPI.dailyForecasts(cityData.Key, 1, true, true).then(function(success) {
+                    dfd.resolve({
+                        forecast: success,
+                        city: cityData.EnglishName
+                    });
+                }, function(error) {
+                    dfd.reject(error);
+                    alert('error in weather dailyforecasts');
+                    alert(JSON.stringify(error));
+                });
+            }
+
+        }, function(erorr) {
+            alert('error in weather search coords');
+            alert(JSON.stringify(erorr));
+            dfd.reject(erorr);
+        });
+
+
+        return dfd.promise();
+    }
     return {
         getDailyForecast: getDailyForecast,
-        getWeeklyForecast: getWeeklyForecast
+        getWeeklyForecast: getWeeklyForecast,
+        getCurrentPositionForecast: getCurrentPositionForecast
     }
 })();

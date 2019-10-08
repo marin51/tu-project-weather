@@ -3,47 +3,24 @@ var weeklyforecast = (function() {
     function init(city) {
         //get city data
         weather.getWeeklyForecast(city).then(function(success) {
-            var cityData = json_weeklycities[city].DailyForecasts,
-                headerHTML = '',
-                listItemHTML = '';
-            //build content
-            // headerHTML += '<div class="card">';
-            // headerHTML += '<div id="country">Country: <div class="country">' + 'Bulgaria' + '</div></div>';
-            // headerHTML += '<div id="population">Population: <div class="population">' + cityData.city.population + '</div></div>';
-            // headerHTML += '<div id="coords">Coords: <div class="lat"> lat: ' + cityData.city.coord.lat + '</div><div class="lon"> lon: ' + cityData.city.coord.lon + '</div></div>';
-            // headerHTML += '</div>';
-
-
-            $($('#weekly-forecast')[0])[0].content.querySelector('#general-city-info').innerHTML = headerHTML;
-
-
-
-
-
-
 
             $($('#weekly-forecast')[0])[0].content.querySelector('#five-day-forecast').innerHTML = generateForecastHTML(city);
 
             //controller
             function controller() {
                 $('.weekly-forecast-page #title').text(city);
-
-
-
             }
             //display
             pushPage('weekly-forecast', '', controller);
 
         }, function(error) {
             ons.notification.alert('Ooops! It seems there are an error. Please try again later.');
-        })
-
+        });
     }
 
 
     function generateForecastHTML(city) {
-        var html = '',
-            // isdaytimeBool = isDaytime(json_weather.weatherData.DailyForecasts[0].Sun.Rise, json_weather.weatherData.DailyForecasts[0].Sun.Set, json_weather.cityData.TimeZone.Name),
+        let html = '',
             forecastLength = json_weeklycities[city].DailyForecasts.length,
             forecastData = json_weeklycities[city].DailyForecasts;
 

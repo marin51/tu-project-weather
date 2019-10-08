@@ -1,8 +1,8 @@
 // load page and clear the stack(all states);
 var loadPage = function(pageId, animation, controller) {
-    var appMenu = document.getElementById('menu');
-    var appNavigator = document.getElementById('myNavigator');
-    var anim = 'fade-ios';
+    let appMenu = document.getElementById('menu'),
+        appNavigator = document.getElementById('myNavigator'),
+        anim = 'fade-ios';
     if (animation !== '') {
         anim = animation;
     }
@@ -23,8 +23,8 @@ var loadPage = function(pageId, animation, controller) {
 };
 
 var pushPage = function(page, anim, callbackFunction) {
-    var appNavigator = document.getElementById('myNavigator');
-    var pageAnimation = 'slide-ios';
+    let appNavigator = document.getElementById('myNavigator'),
+        pageAnimation = 'slide-ios';
     if (anim === '') {
         pageAnimation = 'slide-ios';
     } else { pageAnimation = anim }
@@ -38,14 +38,14 @@ var pushPage = function(page, anim, callbackFunction) {
     });
 };
 var openMenu = function() {
-    var appMenu = document.getElementById('menu');
+    let appMenu = document.getElementById('menu');
     appMenu.open();
 };
 var popPage = function() {
-    var appNavigator = document.getElementById('myNavigator');
+    let appNavigator = document.getElementById('myNavigator');
     // Pop page
 
-    myNavigator.popPage({
+    appNavigator.popPage({
         callback: function() {
             console.log('Pop page...');
         }
@@ -111,11 +111,5 @@ function genereteWindDirection(degreess) {
 
 
 function isActualForecast(forecastDay) {
-    var dateNow = new Date().getDate();
-
-    if (dateNow == new Date(forecastDay)) {
-        return true;
-    } else {
-        return false;
-    }
+    return (new Date().getDate() == new Date(forecastDay) ? true : false)
 }
