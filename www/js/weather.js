@@ -67,7 +67,6 @@ var weather = (function() {
     }
 
     function getCurrentPositionForecast(latitude, longitude) {
-
         let dfd = jQuery.Deferred();
 
         weatherAPI.searchCityByGeoposition(latitude, longitude).then(function(cityData) {

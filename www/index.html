@@ -1,152 +1,160 @@
 <!DOCTYPE html>
-
-<html lang="en_US">
+<html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' mailto:* data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval' file://* ; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; media-src *; img-src * data: blob: ; connect-src *;"
-    />
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
 
-    <link rel="stylesheet" href="libs/onsen/css/onsen-css-components.css">
-    <link rel="stylesheet" href="libs/onsen/css/onsenui.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Weather</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src *  data: blob: 'unsafe-inline' 'unsafe-eval';
+  script-src * data: blob: 'unsafe-inline' 'unsafe-eval';
+  connect-src * data: blob: 'unsafe-inline';
+  img-src * data: blob: 'unsafe-inline';
+  frame-src * data: blob: ;
+  style-src * data: blob: 'unsafe-inline';
+  font-src * data: blob: 'unsafe-inline';">
+
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; "> -->
+
+  <link rel="stylesheet" href="libs/onsen/css/onsen-css-components.css">
+  <link rel="stylesheet" href="libs/onsen/css/onsenui.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <title>Weather</title>
 </head>
 
 <body>
-    <ons-splitter>
-        <ons-splitter-side id="menu" side="left" width="260px" collapse swipeable>
-            <ons-page>
-                <ons-list class="menu-list-container"></ons-list>
-                <ons-list-item onclick="startApp.init()" tappable>
-                    Home
-                </ons-list-item>
-                <ons-list-item onclick="favorites.init()" tappable>
-                    My favorite cities
-                </ons-list-item>
-            </ons-page>
-        </ons-splitter-side>
-        <ons-splitter-content>
-            <ons-navigator id="myNavigator" page="start-loading-page"></ons-navigator>
-        </ons-splitter-content>
-    </ons-splitter>
+  <ons-splitter>
+    <ons-splitter-side id="menu" side="left" width="260px" collapse swipeable>
+      <ons-page>
+        <ons-list class="menu-list-container"></ons-list>
+        <ons-list-item onclick="startApp.init()" tappable>
+          Home
+        </ons-list-item>
+        <ons-list-item onclick="favorites.init()" tappable>
+          My favorite cities
+        </ons-list-item>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content>
+      <ons-navigator id="myNavigator" page="start-loading-page"></ons-navigator>
+    </ons-splitter-content>
+  </ons-splitter>
 
 
-    <template id="start-loading-page">
-        <ons-page class="startscreen-loading-page">
-            <div class="main-container start-loading-page-container">
-            
-                <div id="loading-page-normal-spinner" class="start-loading-page-outer">
-                    <div class="start-loading-page-inner">
-                        <ons-modal id="loading-modal-global" direction="up" style="background-color: rgba(242, 242, 242, .99);" >
-                          <div style="text-align: center"> 
-                            <ons-progress-circular class="" indeterminate></ons-progress-circular>
-                        </div> 
-                        </ons-modal>
-                    </div>
-                </div>
-            </div>
+  <template id="start-loading-page">
+    <ons-page class="startscreen-loading-page">
+      <div class="main-container start-loading-page-container">
 
-        </ons-page>
-    </template>
+        <div id="loading-page-normal-spinner" class="start-loading-page-outer">
+          <div class="start-loading-page-inner">
+            <ons-modal id="loading-modal-global" direction="up" style="background-color: rgba(242, 242, 242, .99);">
+              <div style="text-align: center">
+                <ons-progress-circular class="" indeterminate></ons-progress-circular>
+              </div>
+            </ons-modal>
+          </div>
+        </div>
+      </div>
 
-    <template id="home">
-                <ons-page id="home-page-template">
-                  <ons-toolbar>
-                    <div class="left">
-                      <ons-toolbar-button onclick="openMenu()">
-                        <ons-icon icon="md-menu"></ons-icon>
-                      </ons-toolbar-button>
-                    </div>
-                    <div class="center">
-                      Welcome to my app
-                    </div>
+    </ons-page>
+  </template>
 
-                  </ons-toolbar>
-                  <div class="main-container">
-                      <img src="../www/res/img/cloudy-day-weather.svg" alt="weather" srcset="">
-                      <button id="check-location-button" class="button--cta">Add city</button>
-                      <ons-progress-circular class="progess-icon hide" indeterminate></ons-progress-circular>
-                  </div>
-                </ons-page>
-              </template>
+  <template id="home">
+    <ons-page id="home-page-template">
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="openMenu()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Welcome to my app
+        </div>
 
-    <template id="favorites">
-                <ons-page id="favorite-cities-page-template">
-                  <ons-toolbar>
-                    <div class="left">
-                      <ons-toolbar-button onclick="openMenu()">
-                        <ons-icon icon="md-menu"></ons-icon>
-                      </ons-toolbar-button>
-                    </div>
-                    <div class="center">
-                      Favorites
-                    </div>
-                  </ons-toolbar>
-                  <div class="main-container">
-                      <ons-card>
-                          <div>You can add new forecasts from a home page.</div>
-                            <img src="res/img/undraw_weather_app_i5sm.svg" style="max-width: 100%" alt="">
-                        </ons-card>
-                    <ons-list id="city-list"></ons-list>
-                  </div>
-                </ons-page>
-              </template>
+      </ons-toolbar>
+      <div class="main-container">
+        <img src="res/img/cloudy-day-weather.svg" alt="weather" srcset="">
+        <div class="home-message">Let's check location first...</div>
+        <button id="check-location-button" class="button--cta">Add city</button>
+        <ons-progress-circular class="progess-icon hide" indeterminate></ons-progress-circular>
+      </div>
+    </ons-page>
+  </template>
 
-    <template id="addNewCity">
-                <ons-page>
-                  <ons-toolbar>
-                    <div class="left">
-                      <ons-toolbar-button onclick="openMenu()">
-                        <ons-icon icon="md-menu"></ons-icon>
-                      </ons-toolbar-button>
-                    </div>
-                    <div class="center">
-                      Add new
-                    </div>
-                  </ons-toolbar>
-                </ons-page>
-      </template>
+  <template id="favorites">
+    <ons-page id="favorite-cities-page-template">
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="openMenu()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Favorites
+        </div>
+      </ons-toolbar>
+      <div class="main-container">
+        <ons-card>
+          <div>You can add new forecasts from a home page.</div>
+          <img src="res/img/undraw_weather_app_i5sm.svg" style="max-width: 100%" alt="">
+        </ons-card>
+        <ons-list id="city-list"></ons-list>
+      </div>
+    </ons-page>
+  </template>
 
-    <template id="weekly-forecast">
-        <ons-page class="weekly-forecast-page">
-          <ons-toolbar>
-            <div class="left">
-                <ons-back-button></ons-back-button>
-              </ons-toolbar-button>
-            </div>
-            <div id="title" class="center">
-            </div>
-          </ons-toolbar>
-          <div class='main-container'>
-              <ons-card> 
-                You can see five days forecast in list below 
-                <div id="general-city-info"></div>
-                <img src="res/img/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
-              </ons-card>
-              <ons-list id="five-day-forecast"></ons-list>
-            </div>
-        </ons-page>
-</template>
+  <template id="addNewCity">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="openMenu()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Add new
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </template>
 
-    <script src="libs/onsen/js/onsenui.min.js"></script>
-    <script src="libs/jquery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
-    <script type="text/javascript" src="js/startapp.js"></script>
-    <script type="text/javascript" src="js/weather.js"></script>
-    <script type="text/javascript" src="js/favorites.js"></script>
-    <script type="text/javascript" src="js/weeklyforecast.js"></script>
-    <script type="text/javascript" src="js/weather.service.js"></script>
+  <template id="weekly-forecast">
+    <ons-page class="weekly-forecast-page">
+      <ons-toolbar>
+        <div class="left">
+          <ons-back-button></ons-back-button>
+          </ons-toolbar-button>
+        </div>
+        <div id="title" class="center">
+        </div>
+      </ons-toolbar>
+      <div class='main-container'>
+        <ons-card>
+          You can see five days forecast in list below
+          <div id="general-city-info"></div>
+          <img src="res/img/undraw_weather_d9t2.svg" style="max-width: 100%" alt="">
+        </ons-card>
+        <ons-list id="five-day-forecast"></ons-list>
+      </div>
+    </ons-page>
+  </template>
 
-    <script type="text/javascript">
-        app.initialize();
-    </script>
+  <script src="libs/onsen/js/onsenui.min.js"></script>
+  <script src="libs/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript" src="js/startapp.js"></script>
+  <script type="text/javascript" src="js/weather.js"></script>
+  <script type="text/javascript" src="js/favorites.js"></script>
+  <script type="text/javascript" src="js/weeklyforecast.js"></script>
+  <script type="text/javascript" src="js/weather.service.js"></script>
+
+  <script type="text/javascript">
+    app.initialize();
+  </script>
 </body>
 
 </html>

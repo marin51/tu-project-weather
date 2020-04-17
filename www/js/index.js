@@ -22,13 +22,12 @@ var app = {
         this.bindEvents();
     },
     bindEvents: function() {
-        console.log('im in index')
-            // $('ons-splitter').after('<ons-modal id="loading-modal-global" direction="up" style="background-color: rgba(242, 242, 242, .99);" ><div style="text-align: center"> <ons-progress-circular class="" indeterminate></ons-progress-circular></div><div style="color:red;"> loading...</div></ons-modal>');
-            // loading = document.querySelector('#loading-modal-global');
-            // loading.show();
-            // setTimeout(() => {
-            //     startApp.init();
-            // }, 200);
+        // $('ons-splitter').after('<ons-modal id="loading-modal-global" direction="up" style="background-color: rgba(242, 242, 242, .99);" ><div style="text-align: center"> <ons-progress-circular class="" indeterminate></ons-progress-circular></div><div style="color:red;"> loading...</div></ons-modal>');
+        // loading = document.querySelector('#loading-modal-global');
+        // loading.show();
+        // setTimeout(() => {
+        //     startApp.init();
+        // }, 200);
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {

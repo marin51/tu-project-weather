@@ -3,7 +3,6 @@ var startApp = (function() {
     function init() {
         getDailyForecastCitesData();
         navigator.geolocation.getCurrentPosition(function(position) {
-
             weather.getCurrentPositionForecast(position.coords.latitude, position.coords.longitude).then(function(data) {
 
                 saveDailyForecastCitiesLocally(data.forecast, data.city);
@@ -91,7 +90,7 @@ var startApp = (function() {
         }
 
         if (results) {
-            html += '<ons-list-header id="title">City ' + city + ' <img class="done-icon hide" src="../www/res/img/baseline-done-24px.svg" alt="" srcset=""></ons-list-header>';
+            html += '<ons-list-header id="title">City ' + city + ' <img class="done-icon hide" src="res/img/baseline-done-24px.svg" alt="" srcset=""></ons-list-header>';
             html += '<ons-list-item id="min-temp">Today minimum :' + results.DailyForecasts[0].Temperature.Minimum.Value + '°C</ons-list-item>';
             html += '<ons-list-item id="max-tem">Today maximum : ' + results.DailyForecasts[0].Temperature.Maximum.Value + '°C</ons-list-item>';
             html += '<ons-list-item id="wind-speed"> ' + results.Headline.Text + '</ons-list-item>';
